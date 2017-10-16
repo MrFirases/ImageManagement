@@ -42,14 +42,17 @@ class UserManagementController extends Controller
             $user->setEmail($request->get('email'));
             $user->setEmailCanonical($request->get('email'));
 
+
             if ($request->get('role') == 'ROLE_ADMIN') {
                 $user->setRoles(array(null));
                 $user->setRoles(array("ROLE_ADMIN"));
             }
+
             if ($request->get('role') == 'ROLE_USER') {
                 $user->setRoles(array(null));
                 $user->setRoles(array("ROLE_USER"));
             }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -73,5 +76,6 @@ class UserManagementController extends Controller
         $em->flush();
         return $this->redirectToRoute('user_list');
     }
+
 
 }
